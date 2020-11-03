@@ -20,7 +20,7 @@ When debugging, however, many of these features become inaccessible.
 With Spyder, we aim to bring back these capabilities and more for a truly premium debugging experience!
 (And believe me, I use this debugger a lot, and not only because I write code that might contain bugs :p).
 
-In this post, I will describe the debugger improvements we've already made in Spyder 4, as well as those I am working on for Spyder 4.2 and beyond, which are already under review in a bunch of Pull Requests.
+In this post, I will describe the debugger improvements we've already made in Spyder 4, as well as those we are working on for Spyder 4.2 and beyond, which are already under review in a bunch of Pull Requests!
 
 
 
@@ -38,7 +38,7 @@ Just press `Tab` to trigger autocomplete suggestions, and use the up and down ar
 
 ![Debugger-autocomplete](debugger-autocomplete.png)
 
-This can result useful if you don't know every documentation by heart!
+This can be useful if you don't know every documentation by heart!
 
 Another improvement that we added is the ability to write multiline statements.
 
@@ -56,16 +56,12 @@ Now, these can be used in the debugger as well!
 
 ## Core improvements
 
-When debugging code, a lot of time can be lost stepping through other Python packages . To avoid that, enable the new `Ignore Python libraries while debugging` option under the `Debug` menu.
+When debugging code, a lot of time can be lost stepping through other Python packages . To avoid that, enable the new `Ignore Python libraries while debugging` option under the `Preferences` > `IPython console` > `Degugger` menu.
 This will skip all the built-in and third-party Python modules and help you focus on your own code.
 
 Another pain point for me is the mix of Pdb commands and Python statements when using the interactive prompt.
 While debugging a script with a variable named `step`, for example, typing `step` in the Pdb prompt will not display the value of `step`, but will instead step through the code.
-To avoid this, the Spyder 4.2 debugger will require the addition of an exclamation mark in front of the Pdb commands to separate them from Python expressions.
-
-This adds an extra character when stepping through code, which has a big impact when using the single character commands such as (s)tep or (n)ext.
-To solve this problem, all the single character Pdb commands will be available with a configurable keyboard shortcut.
-For example, the `step` command (`s`) can be triggered with `Alt+C`.
+To avoid this, in the Spyder 4.2 debugger, local variables will mask the pdb commands. An exclamation mark prefix can be used to signify that the code is a pdb command, similar to the `%` for IPython magics.
 
 ![Debugger](debugger-step.png)
 
@@ -74,7 +70,7 @@ I can have a variable named `step` and use it just as I would in the IPython she
 While debugging, the context changes constantly, which can be annoying if you need to use a certain module in each frame.
 To address this, Spyder 4.2 will allow you to execute a snippet of code before any Pdb command.
 I personally use `import matplotlib.pyplot as plt` so I can use Matplotlib anywhere with no extra commands!
-You'll be able to set this up for yourself under `Preferences` > `IPython Console` > `Startup` > `Run code while debugging`.
+You'll be able to set this up for yourself under `Preferences` > `IPython Console` > `Debugger` > `Run code while debugging`.
 
 
 ![Debugger modules](debugger-modules.png)
@@ -86,7 +82,7 @@ I have `plt` everywhere!
 ## Matplotlib support
 
 Speaking of using Matplotlib, two improvements will make your plotting life much easier while in the debugger.
-First, if you use the `inline` backend, you can now enable plotting after each command by selecting the `Process execute events while debugging` option from the `Debug` menu.
+First, if you use the `inline` backend, you can now enable plotting after each command by selecting the `Process execute events while debugging` option from the `Preferences` > `IPython Console` > `Debugger` menu.
 
 ![Debugger plots](debugger-plots.png)
 
@@ -119,7 +115,6 @@ Breakpoints gives you a list of all the breakpoints you have set throughout your
 ![Debugger breakpoint](debugger-breakpoint.png)
 
 The Variable Explorer pane allows you to browse and modify the local namespace wherever the debugger is stopped.
-
 
 ![Variable Explorer](variable-explorer.png)
 
